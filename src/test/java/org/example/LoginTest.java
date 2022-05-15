@@ -24,6 +24,8 @@ public class LoginTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //получение ссылки на страницу входа из файла настроек
         driver.get(ConfProperties.getProperty("loginpage"));
+
+
     }
 
 }

@@ -5,7 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.logging.Logger;
+
 public class LoginPage {
+
+    private static Logger log = Logger.getLogger(LoginPage.class.getName());
 
     public WebDriver driver;
     /**
@@ -44,18 +48,21 @@ public class LoginPage {
      * метод для ввода логина
      */
     public void inputLogin(String login) {
+        log.info("Вводим логин");
         loginField.sendKeys(login);
     }
     /**
      * метод для ввода пароля
      */
     public void inputPasswd(String passwd) {
+        log.info("Вводим пароль");
         passwdField.sendKeys(passwd);
     }
     /**
      * метод для осуществления нажатия кнопки входа в аккаунт
      */
     public void clickLoginBtn() {
+        log.info("Нажимаем кнопку войти");
         buttonEnter.click();
     }
 

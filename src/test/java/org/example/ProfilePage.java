@@ -9,7 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.logging.Logger;
+
 public class ProfilePage {
+
+    private static Logger log = Logger.getLogger(ProfilePage.class.getName());
 
     /**
      * конструктор класса, занимающийся инициализацией полей класса
@@ -42,12 +46,15 @@ public class ProfilePage {
      * метод для нажатия кнопки меню пользователя
      */
     public void entryMenu() {
+        log.info("Нажатие на профиль пользователя");
         userProfile.click();
     }
     /**
      * метод для нажатия кнопки выхода из аккаунта
      */
     public void userLogout() {
+        log.info("Выход из аккаунта");
         logoutBtn.click();
     }
+
 }

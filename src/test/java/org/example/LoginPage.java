@@ -16,6 +16,11 @@ public class LoginPage {
         this.driver = driver;
     }
     /**
+     * определение локатора для нажатии на кнопку [Почта]
+     */
+//    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[2]/div/div/div[2]/div[3]/div/div/div/div[1]/form/div[1]/div[2]/button")
+//    private WebElement buttonMail;
+    /**
      * определение локатора поля ввода логина
      */
     @FindBy(xpath = "//*[@id=\"passp-field-login\"]")
@@ -30,6 +35,11 @@ public class LoginPage {
      */
     @FindBy(xpath = "//*[@id=\"passp-field-passwd\"]")
     private WebElement passwdField;
+
+    /**
+     * метод для выбора автоаризации по почте
+     */
+    //public void clickEmailBtn() { buttonMail.click(); }
     /**
      * метод для ввода логина
      */
@@ -48,5 +58,6 @@ public class LoginPage {
     public void clickLoginBtn() {
         buttonEnter.click();
     }
+
 
 }

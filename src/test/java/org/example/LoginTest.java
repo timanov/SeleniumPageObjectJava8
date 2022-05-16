@@ -1,9 +1,12 @@
 package org.example;
 
+import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.Dialect;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,19 +15,19 @@ public class LoginTest {
     public static LoginPage loginPage;
     public static ProfilePage profilePage;
     public static WebDriver driver;
+    //public static final Dialect W3C = null;
 
     /**
      * осуществление первоночальной настройки
      */
-
     @BeforeClass
-    public static void main(String[] args) {
-        loginPage = new LoginPage(driver);
-        profilePage = new ProfilePage(driver);
-        driver = new ChromeDriver();
-        //определние пути до драйвера и его настройка
+    public static void setup() {
+        //определение пути до драйвера и его настройка
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         //создание экземпляра драйвера
+        driver = new ChromeDriver();
+        loginPage = new LoginPage(driver);
+        profilePage = new ProfilePage(driver);
         //окно разворачивается на полный экран
         driver.manage().window().maximize();
         //задержка на выполнение теста = 10 сек.
@@ -33,18 +36,36 @@ public class LoginTest {
         driver.get(ConfProperties.getProperty("loginpage"));
     }
 
+    /**
+     * тестовый метод для осуществления аутентификации
+     */
     @Test
     public void loginTest() {
-        //значение login/password берутся из файла настроек по аналогии с chromedriver и login page
+        //Нажатие на кнопку [Почта]
+        //loginPage.clickEmailBtn();
         //вводим логин
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         //нажимаем кнопку входа
         loginPage.clickLoginBtn();
         //вводим пароль
         loginPage.inputPasswd(ConfProperties.getProperty("password"));
+        //нажимаем кнопку входа
+        loginPage.clickLoginBtn();
         //нажимаем на иконку пользователя
         profilePage.entryMenu();
         //получаем отображаемый логин
-        String user = profilePage.getUserName();}
+        String user = profilePage.getUserName();
         //сравниваем полученный логин с логином из файла настроек
+        //Assert.assertEquals(ConfProperties.getProperty("login"), user);
+    }
+
+    /**
+     * осуществление выхода из аккаунта с последующим закрытием окна браузера
+     */
+    @AfterClass
+    public static void tearDown() {
+        profilePage.entryMenu();
+        profilePage.userLogout();
+        driver.quit();
+    }
 }
